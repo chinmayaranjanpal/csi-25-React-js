@@ -1,0 +1,24 @@
+📋 Project Description
+This is a React-based form that includes client-side validation without using any third-party libraries. It captures the following fields:
+
+First Name
+
+Last Name
+
+Username
+
+E-mail
+
+Password (with show/hide functionality)
+
+Phone Number (split into country code and number)
+
+Country (dropdown)
+
+City (dropdown based on selected country)
+
+PAN No.
+
+Aadhar No.
+
+After successful validation and submission, the form redirects to a new route that displays the submitted data.
