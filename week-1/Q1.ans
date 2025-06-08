@@ -22,3 +22,70 @@ PAN No.
 Aadhar No.
 
 After successful validation and submission, the form redirects to a new route that displays the submitted data.
+
+
+
+🚀 Features
+Field Validation using native JavaScript and Regex
+
+Conditional Rendering of error messages
+
+Disable Submit Button until all fields are valid
+
+Dynamic Dropdowns for country and city
+
+Routing to show submitted data on a new page
+
+Password Toggle to show/hide password input
+
+🛠️ Tech Stack
+React (Functional Components & Hooks)
+
+React Router (for navigation)
+
+CSS Modules or plain CSS
+
+
+📦 Installation commands
+
+git clone <your-repo-url>
+cd react-form-validation
+npm install
+npm start
+
+🧠 How It Works
+Form Page (/form):
+
+Each input is validated using JavaScript regex patterns.
+
+Submit button is disabled until the form is valid.
+
+Password field has a toggle for visibility.
+
+City options change based on selected country.
+
+Success Page (/submitted):
+
+Shows submitted form data neatly formatted.
+
+
+🔒 Validation Rules
+Field	Rule
+First/Last Name	Required, alphabets only
+Username	Required, alphanumeric, 4–20 characters
+E-mail	Required, valid email format
+Password	Required, min 6 characters, mix of letters/numbers
+Phone No.	Required, 10 digits, valid country code
+PAN No.	Required, 10-character alphanumeric (e.g., ABCDE1234F)
+Aadhar No.	Required, exactly 12 digits
+
+
+src/
+│
+├── components/
+│   └── Form.js
+│   └── SuccessPage.js
+│
+├── App.js
+├── index.js
+└── App.css
