@@ -1,0 +1,184 @@
+Step-by-Step Guide to Building the React To-Do List
+1. Set Up Your React Project
+First, create a new React application:
+
+bash
+Copy
+Edit
+npx create-react-app todo-app
+cd todo-app
+npm start
+2. Create the To-Do List Component
+In your src folder, create a file named TodoList.js and add the following code:
+
+jsx
+Copy
+Edit
+import React, { useState, useEffect } from 'react';
+
+function TodoList() {
+  const [tasks, setTasks] = useState([]);
+  const [input, setInput] = useState('');
+  const [filter, setFilter] = useState('all');
+
+  useEffect(() => {
+    const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    setTasks(storedTasks);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
+
+  const addTask = () => {
+    if (input.trim()) {
+      const newTask = { text: input, completed: false, id: Date.now() };
+      setTasks([...tasks, newTask]);
+      setInput('');
+    }
+  };
+
+  const toggleTask = (id) => {
+    setTasks(tasks.map(task =>
+      task.id === id ? { ...task, completed: !task.completed } : task
+    ));
+  };
+
+  const deleteTask = (id) => {
+    setTasks(tasks.filter(task => task.id !== id));
+  };
+
+  const filteredTasks = tasks.filter(task => {
+    if (filter === 'completed') return task.completed;
+    if (filter === 'incomplete') return !task.completed;
+    return true;
+  });
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        placeholder="Add a new task"
+      />
+      <button onClick={addTask}>Add</button>
+      <div>
+        <button onClick={() => setFilter('all')}>All</button>
+        <button onClick={() => setFilter('completed')}>Completed</button>
+        <button onClick={() => setFilter('incomplete')}>Incomplete</button>
+      </div>
+      <ul>
+        {filteredTasks.map(task => (
+          <li key={task.id}>
+            <span
+              onClick={() => toggleTask(task.id)}
+              style={{ textDecoration: task.completed ? 'line-through' : 'none' }}
+            >
+              {task.text}
+            </span>
+            <button onClick={() => deleteTask(task.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default TodoList;
+3. Integrate the Component into Your App
+In your src/App.js, import and use the TodoList component:
+
+jsx
+Copy
+Edit
+import React from 'react';
+import TodoList from './TodoList';
+
+function App() {
+  return (
+    <div className="App">
+      <h1>To-Do List</h1>
+      <TodoList />
+    </div>
+  );
+}
+
+export default App;
+4. Style Your Application
+You can add basic styles in src/App.css to enhance the appearance of your To-Do List.
+
+📂 Submitting Your Code on GitHub
+Initialize Git in Your Project Folder
+
+bash
+Copy
+Edit
+git init
+Add Your Files to the Repository
+
+bash
+Copy
+Edit
+git add .
+Commit Your Changes
+
+bash
+Copy
+Edit
+git commit -m "Initial commit of To-Do List app"
+Create a New Repository on GitHub
+
+Go to GitHub and create a new repository named todo-app.
+
+Link Your Local Repository to GitHub
+
+bash
+Copy
+Edit
+git remote add origin https://github.com/yourusername/todo-app.git
+Push Your Code to GitHub
+
+bash
+Copy
+Edit
+git push -u origin master
+🧪 Brief Testing Guidance
+To ensure your To-Do List application functions correctly, perform the following tests:
+
+Task Addition
+
+Input a new task and click "Add".
+
+Verify that the task appears in the list.
+
+Task Completion
+
+Click on a task to mark it as completed.
+
+Ensure the task text is struck through.
+
+Task Deletion
+
+Click the "Delete" button next to a task.
+
+Confirm that the task is removed from the list.
+
+Input Validation
+
+Try adding an empty task.
+
+Ensure no task is added and that the input field is cleared.
+
+Filtering
+
+Add multiple tasks with varying completion statuses.
+
+Use the filter buttons to view tasks based on their completion status.
+
+Persistence
+
+Add tasks and refresh the page.
+
+Verify that tasks persist after the page reloads.
+
